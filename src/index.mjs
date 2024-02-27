@@ -35,22 +35,17 @@ app.get('/',(req,res)=>{
     res.send("Hello World")
 })
 
-app.get('/app',(req,res)=>{
-    res.status(201).json({
-        name:"farhan"
-    })
-})
-
-app.get('/api/products/:id',(request,response) =>{
-    console.log(request.params)
-    response.json([
-    {id:1, name:"chicken breast", price:15.00}
-    ])
-})
-
+//using parameter
 app.get('/api/users/:id',(req,res)=>{
     const result = users.find((data)=> data.id === parseInt(req.params.id)) || {status:"404"}
     res.json(result)
+})
+
+//using query
+app.get('/user/data', (req,res)=>{
+  const {query : {nama,nim}} = req
+  console.log(nama  + " " + nim)
+  res.send("data is inputed")
 })
 
 app.listen(PORT,()=>{
